@@ -12,7 +12,7 @@ class User extends Authenticatable
 
   public function propertys()
   {
-      return $this->hasMany(Property::class);
+      return $this->hasMany('App\Property');
   }
     use Notifiable, HasRoles;
     /**

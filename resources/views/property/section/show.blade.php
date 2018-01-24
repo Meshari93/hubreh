@@ -6,7 +6,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Section {{ $section->id }}</div>
                     <div class="panel-body">
-
                         <a href="{{ url('/section') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <a href="{{ url('/section/' . $section->id . '/edit') }}" title="Edit Section"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
 

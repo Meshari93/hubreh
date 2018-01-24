@@ -6,10 +6,16 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Property;
+use App\Serf;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,6 +28,7 @@ class PropertyController extends Controller
 
         if (!empty($keyword)) {
             $property = Property::where('name', 'LIKE', "%$keyword%")
+                ->orWhere('id', 'LIKE', "%$keyword%")
                 ->orWhere('type', 'LIKE', "%$keyword%")
                 ->orWhere('phon_num_one', 'LIKE', "%$keyword%")
                 ->orWhere('phon_num_two', 'LIKE', "%$keyword%")
@@ -70,15 +77,17 @@ class PropertyController extends Controller
               $property->poryorty = 0;
               $property->time_entry = $request->time_entry;
               $property->time_out = $request->time_out;
-              $property->status = $request->status;
+              $property->status = 'actev';
               $property->evaluation = 0;
               $property->describstion = $request->describstion;
-              $property->name = $request->name;
-              $property->name = $request->name;
-              $property->num_section = $request->num_section;
-
+              $property->num_section = 0;
               $property->save();
-        return redirect('property')->with('flash_message', 'Property added!');
+              $property_id = $property->id;
+
+              $serves = Serf::where('type', '=' ,'utility')->get();
+              return view('property.section.create', compact('property_id', 'serves' )) ;
+
+
     }
 
     /**
@@ -91,8 +100,9 @@ class PropertyController extends Controller
     public function show($id)
     {
         $property = Property::findOrFail($id);
-
-        return view('property.property.show', compact('property'));
+        $i =1;
+        $imag  = 'img';
+        return view('property.property.show', compact('property','i'.'imag'));
     }
 
     /**
@@ -141,9 +151,9 @@ class PropertyController extends Controller
 
         return redirect('property')->with('flash_message', 'Property deleted!');
     }
-    public function createsection($id)
+    public function createsection($property_id)
     {
-      // return dd($id);
-          return view('property.section.create', compact('id')) ;
+      $serves = Serf::where('type', '=' ,'utility')->get();
+          return view('property.section.create', compact('property_id', 'serves' )) ;
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Page Loader -->
-    
+
     <!-- #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
@@ -1058,4 +1058,20 @@
         </div>
     </section>
 
+
 @endsection
+@section('js')
+<!-- <script src="{{ asset('js/plugins/bootstrap-select/js/bootstrap-select.js') }}"></script> -->
+<!-- <script src="{{ asset('js/plugins/jquery-slimscroll/jquery.slimscroll.js') }}"></script> -->
+<script src="{{ asset('js/plugins/node-waves/waves.js') }}"></script>
+<!-- <script src="{{ asset('js/plugins/jquery-countto/jquery.countTo.js') }}"></script> -->
+<!-- <script src="{{ asset('/js/admin.js') }}"></script> -->
+<script src="{{ asset('/js/plugins/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('/js/plugins/morrisjs/morris.js') }}"></script>
+<script src="{{ asset('/js/plugins/chartjs/Chart.bundle.js') }}"></script>
+<script src="{{ asset('/js/plugins/flot-charts/jquery.flot.js') }}"></script>
+<script src="{{ asset('/js/plugins/flot-charts/jquery.flot.resize.js') }}"></script>
+<script src="{{ asset('/js/plugins/flot-charts/jquery.flot.pie.js') }}"></script>
+<script src="{{ asset('/js/plugins/flot-charts/jquery.flot.categories.js') }}"></script>
+<script src="{{ asset('/js/plugins/flot-charts/jquery.flot.time.js') }}"></script>
+@endsection('js')

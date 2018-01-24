@@ -29,4 +29,8 @@ class Serf extends Model
     // protected $fillable = ['type'];
 
 
+    public function section()
+    {
+      return $this->belongsToMany(Section::class, 'section_serves', 'serves_id', 'section_id')->withTimestamps();
+    }
 }

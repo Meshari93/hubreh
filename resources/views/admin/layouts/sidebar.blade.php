@@ -252,13 +252,13 @@
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a href="pages/tables/normal-tables.html">Normal Tables</a>
+                            <a href="#">Normal Tables</a>
                         </li>
                         <li>
-                            <a href="pages/tables/jquery-datatable.html">Jquery Datatables</a>
+                            <a href="#">Jquery Datatables</a>
                         </li>
                         <li>
-                            <a href="pages/tables/editable-table.html">Editable Tables</a>
+                            <a href="#">Editable Tables</a>
                         </li>
                     </ul>
                 </li>

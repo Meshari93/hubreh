@@ -25,7 +25,25 @@ class Section extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'room_num', 'property_id'];
+    protected $fillable = ['name', 'room_num', 'capacity', 'property_id'];
 
-    
+    /**
+     * function relationshep .
+     *
+     */
+    public function property()
+    {
+      return $this->belongsTo(Property::class, 'property_id');
+    }
+
+
+    public function serves()
+    {
+      return $this->belongsToMany(Serf::class, 'section_serves','section_id', 'serves_id')->withTimestamps();
+    }
+
+    public function picture()
+    {
+      return $this->hasMany(Picture::class);
+    }
 }

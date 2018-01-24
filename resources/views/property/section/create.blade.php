@@ -16,12 +16,15 @@
                                 @endforeach
                             </ul>
                         @endif
-                        <form method="POST" action="{{ url('/section') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+                        <form method="POST" action="{{ url('/section') }}"   accept-charset="UTF-8" class="form-horizontal  " enctype="multipart/form-data" style="background-color:#fff;">
                             {{ csrf_field() }}
                             @include ('property.section.form')
                         </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
 @endsection

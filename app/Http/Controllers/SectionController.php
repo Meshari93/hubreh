@@ -4,8 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Intervention\Image\ImageManager as Images;
+ use Image;
 use App\Section;
+use App\Property;
+use App\Price;
+use App\Serf;
+use App\Picture;
+
+use DB;
+
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
@@ -46,7 +54,9 @@ class SectionController extends Controller
      */
     public function create()
     {
-        return view('property.section.create');
+      $section_id = NULL;
+
+        return view('property.section.create', compact('section_id'));
     }
 
     /**
@@ -58,12 +68,51 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
+      $section = new Section;
+      $section->name        = $request->name;
+      $section->room_num    = $request->room_num;
+      $section->capacity    = $request->capacity;
+      $section->property_id = $request->property_id;
+      $section->save();
 
-        $requestData = $request->all();
+      $sectionprise_id = $section->id;
+      $sectionprise = new Price;
 
-        Section::create($requestData);
+      $sectionprise->typical_day = $request->typical_day;
+      $sectionprise->weekend     = $request->weekend;
+      $sectionprise->feast       = $request->feast;
+      $sectionprise->section_id  = $sectionprise_id;
+      $sectionprise->save();
 
-        return redirect('section')->with('flash_message', 'Section added!');
+       $sectionserves = $request->serves ;
+
+       $section->serves()->attach($sectionserves);
+
+       $i = 0;
+      $sectionimage = new Picture;
+       if ($request->hasFile('file1')) {
+          foreach ($request->file1 as $imagename) {
+            if ($i > 11) { break; }
+            $i = $i + 1;
+            $img = 'img' .$i;
+            // $imagename  = $request->file1[0];
+            $filename =  time() . $i . '.' . $imagename->getClientOriginalExtension();
+            Image::make($imagename)->resize(1920, 1080)->save(public_path('/images/store/sectionimage/') . $filename);
+            $sectionimage-> $img                =  $filename;
+         }
+          } else {
+               $filename = 'avatar.png';
+         }
+
+          $sectionimage->section_id  = $sectionprise_id;
+         $sectionimage->save();
+
+
+ // ------------------------------------------------//
+      $property_id = $request->property_id;
+
+      DB::table('properties')->whereId($property_id)->increment('num_section');
+      return back()->with('flash_message', 'Section added!');
     }
 
     /**
@@ -90,8 +139,8 @@ class SectionController extends Controller
     public function edit($id)
     {
         $section = Section::findOrFail($id);
-
-        return view('property.section.edit', compact('section'));
+        $section_id = $section->property_id;
+        return view('property.section.edit', compact('section', 'section_id'));
     }
 
     /**
@@ -124,6 +173,7 @@ class SectionController extends Controller
     {
         Section::destroy($id);
 
-        return redirect('section')->with('flash_message', 'Section deleted!');
+        return back();
+        // return redirect('section')->with('flash_message', 'Section deleted!');
     }
 }

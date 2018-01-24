@@ -27,7 +27,7 @@ Route::group(['middleware' => ['role:admin']], function () {
 
 });
 Route::resource('property', 'PropertyController');
-Route::get('property/{id}/createsection', 'PropertyController@createsection');
+Route::get('property/{section_id}/createsection', 'PropertyController@createsection');
 
 Route::resource('section', 'SectionController');
 
