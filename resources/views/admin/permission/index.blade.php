@@ -2,7 +2,7 @@
 
 @section('content')
 <!--    <div class="container">-->
-<!--        <div class="row">-->            
+<!--        <div class="row">-->
             <div class="col-md-12">
                 <div class="panel panel-default">
                 <div class="panel-heading">Permission</div>
@@ -12,7 +12,7 @@
                           <i class="fa fa-plus" aria-hidden="true"></i> Add New
                       </a>
                       @endcan
-                         
+
                          <div class="col-md-6 navbar-right">
                         {!! Form::open(['method' => 'GET', 'url' => '/admin/permission', 'class' => 'navbar-form', 'role' => 'search'])  !!}
                          <div class="col-md-10">
@@ -30,7 +30,7 @@
                                 </button>
                             </span>
                             </div>
-                                                                                                                 
+
                         {!! Form::close() !!}
                              </div>
 
