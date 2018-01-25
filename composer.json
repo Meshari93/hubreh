@@ -10,7 +10,9 @@
         "intervention/image": "^2.4",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "spatie/laravel-permission": "^2.7"
+        "spatie/laravel-permission": "^2.7",
+         "laravelcollective/html": "^5.4"
+
     },
     "require-dev": {
         "appzcoder/crud-generator": "^3.0",
