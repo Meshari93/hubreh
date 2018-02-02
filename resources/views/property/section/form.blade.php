@@ -61,20 +61,20 @@
         </div>
     </div>
 
-    @if($property_id !== NULL)
-    <input  name="property_id" type="number" hidden value="{{ $property_id}}" >
-    <label class="form-label">Property Id {{$property_id }}</label>
-     @else
-    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 col-md-offset-2 m-b-30">
-      <div class="form-group form-float {{ $errors->has('property_id') ? 'has-error' : ''}}">
+    <!-- if($property_id !== NULL) -->
+    <input  name="property_id" type="number" hidden value=" $property_id}}" >
+    <label class="form-label"> Property Id {{ $property_id }}</label>
+     <!-- else -->
+    <!-- <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 col-md-offset-2 m-b-30">
+      <div class="form-group form-float  $errors->has('property_id') ? 'has-error' : ''}}">
           <div class="form-line">
               <input   class="form-control"  name="property_id" type="number" id="property_id" value="{{ $section->property_id or ''}}" >
                 {!! $errors->first('property_id', '<p class="help-block">:message</p>') !!}
               <label class="form-label">Property Id</label>
           </div>
       </div>
-  </div>
-      @endif
+  </div> -->
+      <!-- endif -->
   <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-md-offset-1 m-b-30 m-t-30">
       <div class="form-group form-float {{ $errors->has('serves') ? 'has-error' : ''}}">
         <label class="form-label">serves</label>

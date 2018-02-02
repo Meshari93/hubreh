@@ -7,11 +7,11 @@
                 <div class="panel panel-default">
                 <div class="panel-heading">Permission</div>
                      <div class="panel-body">
-                      @can('add-Permission')
+                      <!-- can('add-Permission') -->
                         <a href="{{ url('/admin/permission/create') }}" class="btn btn-success btn-sm" title="Add New Permission">
                           <i class="fa fa-plus" aria-hidden="true"></i> Add New
                       </a>
-                      @endcan
+                      <!-- endcan -->
 
                          <div class="col-md-6 navbar-right">
                         {!! Form::open(['method' => 'GET', 'url' => '/admin/permission', 'class' => 'navbar-form', 'role' => 'search'])  !!}

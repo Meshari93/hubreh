@@ -30,22 +30,22 @@ class SectionController extends Controller
      * @return \Illuminate\View\View
      */
 
-    public function index(Request $request)
-    {
-        $keyword = $request->get('search');
-        $perPage = 25;
-
-        if (!empty($keyword)) {
-            $section = Section::where('name', 'LIKE', "%$keyword%")
-                ->orWhere('room_num', 'LIKE', "%$keyword%")
-                ->orWhere('property_id', 'LIKE', "%$keyword%")
-                ->paginate($perPage);
-        } else {
-            $section = Section::paginate($perPage);
-        }
-
-        return view('property.section.index', compact('section'));
-    }
+    // public function index(Request $request)
+    // {
+    //     $keyword = $request->get('search');
+    //     $perPage = 25;
+    //
+    //     if (!empty($keyword)) {
+    //         $section = Section::where('name', 'LIKE', "%$keyword%")
+    //             ->orWhere('room_num', 'LIKE', "%$keyword%")
+    //             ->orWhere('property_id', 'LIKE', "%$keyword%")
+    //             ->paginate($perPage);
+    //     } else {
+    //         $section = Section::paginate($perPage);
+    //     }
+    //
+    //     return view('property.section.index', compact('section'));
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -72,7 +72,8 @@ class SectionController extends Controller
       $section->name        = $request->name;
       $section->room_num    = $request->room_num;
       $section->capacity    = $request->capacity;
-      $section->property_id = $request->property_id;
+      // $section->property_id = $request->property_id;
+      $section->property_id = $property_id;
       $section->save();
 
       $sectionprise_id = $section->id;
@@ -112,7 +113,9 @@ class SectionController extends Controller
       $property_id = $request->property_id;
 
       DB::table('properties')->whereId($property_id)->increment('num_section');
-      return back()->with('flash_message', 'Section added!');
+      // return back()->with('flash_message', '');
+
+      return redirect('property/' . $property_id)->with('flash_message', 'Section added!');
     }
 
     /**
@@ -138,9 +141,11 @@ class SectionController extends Controller
      */
     public function edit($id)
     {
+
         $section = Section::findOrFail($id);
         $section_id = $section->property_id;
-        return view('property.section.edit', compact('section', 'section_id'));
+        $serves = Serf::where('type', '=' ,'utility')->get();
+        return view('property.section.edit', compact('section', 'section_id','serves'));
     }
 
     /**
@@ -159,7 +164,7 @@ class SectionController extends Controller
         $section = Section::findOrFail($id);
         $section->update($requestData);
 
-        return redirect('section')->with('flash_message', 'Section updated!');
+        return redirect('property/' . $section->property_id)->with('flash_message', 'Section updated!');
     }
 
     /**
@@ -172,8 +177,7 @@ class SectionController extends Controller
     public function destroy($id)
     {
         Section::destroy($id);
-
-        return back();
+        return back()->with('flash_message', 'Section deleted!');
         // return redirect('section')->with('flash_message', 'Section deleted!');
     }
 }

@@ -62,6 +62,10 @@ $(function () {
             return form.valid();
         },
         onFinished: function (event, currentIndex) {
+            // var form = $(this);
+         
+            // Submit form input
+            form.submit();
             swal("Good job!", "Submitted!", "success");
         }
     });

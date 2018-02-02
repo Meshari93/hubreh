@@ -33,7 +33,7 @@
                                 @foreach($property as $item)
                                     <tr>
                                         <td>{{ $loop->iteration or $item->id }}</td>
-                                        <td>{{ $item->name }}</td><td>{{ $item->type }}</td><td>{{ $item->phon_num_one }}</td>
+                                        <td>{{ $item->name }}</td><td>{{ $item->type }} ---{{ $item->user_id }}</td><td>{{ $item->phon_num_one }}</td>
                                         <td>
                                             <a href="{{ url('/property/' . $item->id) }}" title="View Property"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/property/' . $item->id . '/edit') }}" title="Edit Property"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

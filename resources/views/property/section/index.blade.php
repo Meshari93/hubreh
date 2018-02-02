@@ -1,6 +1,6 @@
-@extends('layouts.app')
+<!-- extends('layouts.app')
 
-@section('content')
+section('content')
         <div class="row">
             <div class="col-md-9">
                 <div class="panel panel-default">
@@ -56,4 +56,4 @@
                 </div>
             </div>
         </div>
-@endsection
+endsection -->

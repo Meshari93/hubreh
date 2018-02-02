@@ -2,14 +2,19 @@
 
 @section('content')
 <!-- Inline Layout | With Floating Label -->
-<div class="row">
+<div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="header">
-                <h2>
+                <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"> -->
+                <h2  class="pull-left col-lg-6 col-md-6 col-sm-6 col-xs-6">
                     Create New Property
                     <!-- <small>Create New Property</small> -->
                 </h2>
+                <!-- </div> -->
+                <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6"> -->
+                  <a href="{{ url('/property') }}" title="Back"><button class=" btn btn-warning btn-xs "><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                <!-- </div> -->
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -24,9 +29,6 @@
                 </ul>
             </div>
             <div class="body">
-              <div class="float center">
-                <a href="{{ url('/property') }}" title="Back"><button class="btn btn-warning btn-xs "><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-              </div>
               <!-- <br />
               <br /> -->
               @if ($errors->any())
@@ -36,14 +38,15 @@
                       @endforeach
                   </ul>
               @endif
-              <hr>
-              <form method="POST" action="{{ url('/property') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
+              <form method="POST" action="{{ url('/property') }}" accept-charset="UTF-8" id="wizard_with_validation"
+                enctype="multipart/form-data">
                   {{ csrf_field() }}
 
-                  @include ('property.property.form')
+                  @include ('property.property.form', ['submitButtonText' => 'Update'])
 
               </form>
             </div>
+
         </div>
     </div>
 </div>

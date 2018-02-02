@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Property;
 use App\Serf;
+use Auth;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -15,7 +16,7 @@ class PropertyController extends Controller
   {
       $this->middleware('auth');
   }
-
+// &&
     /**
      * Display a listing of the resource.
      *
@@ -24,26 +25,51 @@ class PropertyController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
+        $authid = Auth::user()->id;
         $perPage = 25;
 
-        if (!empty($keyword)) {
-            $property = Property::where('name', 'LIKE', "%$keyword%")
-                ->orWhere('id', 'LIKE', "%$keyword%")
-                ->orWhere('type', 'LIKE', "%$keyword%")
-                ->orWhere('phon_num_one', 'LIKE', "%$keyword%")
-                ->orWhere('phon_num_two', 'LIKE', "%$keyword%")
-                ->orWhere('poryorty', 'LIKE', "%$keyword%")
-                ->orWhere('time_entry', 'LIKE', "%$keyword%")
-                ->orWhere('time_out', 'LIKE', "%$keyword%")
-                ->orWhere('status', 'LIKE', "%$keyword%")
-                ->orWhere('evaluation', 'LIKE', "%$keyword%")
-                ->orWhere('describstion', 'LIKE', "%$keyword%")
-                ->orWhere('num_section', 'LIKE', "%$keyword%")
-                ->paginate($perPage);
-        } else {
-            $property = Property::paginate($perPage);
-        }
 
+
+        if (auth()->user()->hasRole('admin')) {
+          if (!empty($keyword)) {
+              $property = Property::where('name', 'LIKE', "%$keyword%")
+                  ->orWhere('id', 'LIKE', "%$keyword%")
+                  ->orWhere('type', 'LIKE', "%$keyword%")
+                  ->orWhere('phon_num_one', 'LIKE', "%$keyword%")
+                  ->orWhere('phon_num_two', 'LIKE', "%$keyword%")
+                  ->orWhere('poryorty', 'LIKE', "%$keyword%")
+                  ->orWhere('time_entry', 'LIKE', "%$keyword%")
+                  ->orWhere('time_out', 'LIKE', "%$keyword%")
+                  ->orWhere('status', 'LIKE', "%$keyword%")
+                  ->orWhere('evaluation', 'LIKE', "%$keyword%")
+                  ->orWhere('describstion', 'LIKE', "%$keyword%")
+                  ->orWhere('num_section', 'LIKE', "%$keyword%")
+                  ->paginate($perPage);
+          } else {
+              $property = Property::paginate($perPage);
+          }
+        }
+        else {
+          if (!empty($keyword)) {
+              $property = Property::where([['name', 'LIKE', "%$keyword%"],['user_id', '=', "$authid"],])
+                  ->orWhere([['id', 'LIKE', "%$keyword%"],['user_id', '=', "$authid"],])
+                  ->orWhere([['type', 'LIKE', "%$keyword%"],['user_id', '=', "$authid"],])
+                  ->orWhere([['phon_num_one', 'LIKE', "%$keyword%"],['user_id', '=', "$authid"],])
+                  ->orWhere([['phon_num_two', 'LIKE', "%$keyword%"],['user_id', '=', "$authid"],])
+                  ->orWhere([['poryorty', 'LIKE', "%$keyword%"],['user_id', '=', "$authid"],])
+                  ->orWhere([['time_entry', 'LIKE', "%$keyword%"],['user_id', '=', "$authid"],])
+                  ->orWhere([['time_out', 'LIKE', "%$keyword%"],['user_id', '=', "$authid"],])
+                  ->orWhere([['status', 'LIKE', "%$keyword%"],['user_id', '=', "$authid"],])
+                  ->orWhere([['evaluation', 'LIKE', "%$keyword%"],['user_id', '=', "$authid"],])
+                  ->orWhere([['describstion', 'LIKE', "%$keyword%"],['user_id', '=', "$authid"],])
+                  ->orWhere([['num_section', 'LIKE', "%$keyword%"],['user_id', '=', "$authid"],])
+                  ->paginate($perPage);
+          } else {
+            $property = Property::where('user_id', '=', "$authid")->paginate($perPage);
+
+          }
+
+        }
         return view('property.property.index', compact('property'));
     }
 
@@ -85,9 +111,7 @@ class PropertyController extends Controller
               $property_id = $property->id;
 
               $serves = Serf::where('type', '=' ,'utility')->get();
-              return view('property.section.create', compact('property_id', 'serves' )) ;
-
-
+              return redirect('property/' . $property->id  ) ;
     }
 
     /**
