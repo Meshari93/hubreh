@@ -9,17 +9,26 @@
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 
-                        <form method="GET" action="{{ url('/property') }}" accept-charset="UTF-8" class="navbar-form navbar-right" role="search">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Search..." value="{{ request('search') }}">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
+                         <div class="col-md-6 navbar-right">
+                       {!! Form::open(['method' => 'GET', 'url' => '/property', 'class' => 'navbar-form', 'role' => 'search'])  !!}
+                        <div class="col-md-10">
+                            <div class="input-group "  >
+                               <div class="form-line"   >
+                                   <input type="text" class="form-control date" name="search" placeholder="Search..." value="{{ request('search') }}">
 
+                                 </div>
+                                 </div>
+                           </div>
+                            <div class="col-md-1 flot-left">
+                            <span class="input-group-btn ">
+                               <button class="btn btn-default" type="submit">
+                                   <i class="material-icons">search</i>
+                               </button>
+                           </span>
+                           </div>
+
+                           {!! Form::close() !!}
+                            </div>
                         <br/>
                         <br/>
                         <div class="table-responsive">

@@ -25,7 +25,12 @@ class CreatePicturesTable extends Migration
             $table->string('picture7')->nullable();
             $table->string('picture8')->nullable();
             $table->string('picture9')->nullable();
-            $table->string('picture10')->nullable();          
+            $table->string('picture10')->nullable();
+            $table->string('picture11')->nullable();
+            $table->string('picture12')->nullable();
+            $table->string('picture13')->nullable();
+            $table->string('picture14')->nullable();
+            $table->string('picture15')->nullable();
             $table->integer('section_id')->unsigned();
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
             $table->timestamps();

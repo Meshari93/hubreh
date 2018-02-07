@@ -44,6 +44,6 @@ class Section extends Model
 
     public function picture()
     {
-      return $this->hasMany(Picture::class);
+      return $this->hasMany('App\Picture', 'section_id');
     }
 }

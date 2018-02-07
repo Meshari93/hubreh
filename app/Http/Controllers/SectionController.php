@@ -72,11 +72,11 @@ class SectionController extends Controller
       $section->name        = $request->name;
       $section->room_num    = $request->room_num;
       $section->capacity    = $request->capacity;
-      // $section->property_id = $request->property_id;
-      $section->property_id = $property_id;
+      $section->property_id = $request->property_id;
+      // $section->property_id = $property_id;
       $section->save();
-
       $sectionprise_id = $section->id;
+
       $sectionprise = new Price;
 
       $sectionprise->typical_day = $request->typical_day;
@@ -86,7 +86,6 @@ class SectionController extends Controller
       $sectionprise->save();
 
        $sectionserves = $request->serves ;
-
        $section->serves()->attach($sectionserves);
 
        $i = 0;
@@ -95,7 +94,7 @@ class SectionController extends Controller
           foreach ($request->file1 as $imagename) {
             if ($i > 11) { break; }
             $i = $i + 1;
-            $img = 'img' .$i;
+            $img = 'picture' .$i;
             // $imagename  = $request->file1[0];
             $filename =  time() . $i . '.' . $imagename->getClientOriginalExtension();
             Image::make($imagename)->resize(1920, 1080)->save(public_path('/images/store/sectionimage/') . $filename);
@@ -159,12 +158,38 @@ class SectionController extends Controller
     public function update(Request $request, $id)
     {
 
-        $requestData = $request->all();
-
+        // $requestData = $request->all();
+        $requestsection = $request->only(['name', 'room_num', 'capacity']);
         $section = Section::findOrFail($id);
-        $section->update($requestData);
+        $section->update($requestsection);
 
-        return redirect('property/' . $section->property_id)->with('flash_message', 'Section updated!');
+        $sectionprise = $request->only(['typical_day', 'weekend', 'feast']);
+        $prise = Price::where('section_id', '=', $id);
+        $prise->update($sectionprise);
+
+        $sectionprise = $request->only(['typical_day', 'weekend', 'feast']);
+        $prise = Price::where('section_id', '=', $id);
+        $prise->update($sectionprise);
+
+
+      $filename = $request->only(['file1']);
+        $i = 0;
+       $sectionimage = Picture::where('section_id', '=', $id);
+        if ($request->hasFile('file1')) {
+           foreach ($request->file1 as $imagename) {
+             if ($i > 11) { break; }
+             $i = $i + 1;
+             $img = 'picture' .$i;
+             $filename =  time() . $i . '.' . $imagename->getClientOriginalExtension();
+             Image::make($imagename)->resize(1920, 1080)->save(public_path('/images/store/sectionimage/') . $filename);
+             $sectionimage = Picture::where('section_id', '=', $id)->update([$img => $filename]);
+          }
+           }
+           $requestsection = $request->only(['serves']);
+
+         // dd($section->property_id);
+        // $sectionprise = Price::findOrFail($section_id);
+         return redirect('property/' . $section->property_id)->with('flash_message', 'Section updated!');
     }
 
     /**

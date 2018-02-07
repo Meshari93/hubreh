@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Picture extends Model
 {
+  protected $table = 'pictures';
+  
   public function section()
 {
-  return $this->belongsTo(User::class, 'section_id');
+  return $this->belongsTo(Section::class, 'section_id');
 }
+
+
+
 }

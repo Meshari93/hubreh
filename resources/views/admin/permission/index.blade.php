@@ -31,7 +31,7 @@
                             </span>
                             </div>
 
-                        {!! Form::close() !!}
+                            {!! Form::close() !!}
                              </div>
 
                         <br/>

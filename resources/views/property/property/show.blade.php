@@ -35,10 +35,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Property {{ $property->id }}</div>
                     <div class="panel-body">
-
-                        <a href="{{ url('/property') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/property/' . $property->id . '/edit') }}" title="Edit Property"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-
                         <form method="POST" action="{{ url('property' . '/' . $property->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
@@ -96,10 +92,6 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Ouner Information</div>
                     <div class="panel-body">
-
-                        <a href="{{ url('/property') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/property/' . $property->id . '/edit') }}" title="Edit Property"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-
                         <form method="POST" action="{{ url('property' . '/' . $property->id) }}" accept-charset="UTF-8" style="display:inline">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
@@ -174,27 +166,29 @@
                               <table class="table table-borderless">
                                   <tbody>
                                       <tr>
-                                        <th> Ouner	Name </th>
+                                        <th> Section	Name </th>
                                         <td>{{ $section->name	}}</td>
                                       </tr>
                                       <tr>
-                                        <th> Ouner	Room number </th>
+                                        <th> Section	Room number </th>
                                         <td>{{ $section->room_num	}}</td>
                                       </tr>
                                       <tr>
-                                        <th> Ouner	Capacity </th>
+                                        <th> Section	Capacity </th>
                                         <td>{{ $section->capacity	}}</td>
                                       </tr>
                                       <tr>
                                         <th> Section	Status </th>
                                         <td>{{ $section->status	}}</td>
                                       </tr>
-                                      @foreach($section->serves as $serves )
                                       <tr>
-                                        <th> Section	Status </th>
-                                        <td>{{ $serves->serves	}}</td>
+                                        <th> Section	serves </th>
+                                        <td>
+                                            @foreach($section->serves as $serves )
+                                                - {{ $serves->serves	}}
+                                              @endforeach
+                                          </td>
                                       </tr>
-                                      @endforeach
                                   </tbody>
 
                               </table>
@@ -209,99 +203,99 @@
                                 <div class="carousel-inner" role="listbox">
 
                                     @foreach($section->picture as $picture )
-                                    @if( $picture->img1 !=NULL  )
+                                    @if( $picture->picture1 !=NULL  )
                                     <div class="item active">
-                                        <img src="../../images/store/sectionimage/{{$picture->img1}}" />
+                                        <img src="../../images/store/sectionimage/{{$picture->picture1}}" />
                                         <div class="carousel-caption">
                                             <h3>Second slide label</h3>
                                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                                         </div>
                                     </div>
                                     @endif
-                                    @if( $picture->img2 !=NULL  )
+                                    @if( $picture->picture2 !=NULL  )
                                     <div class="item">
-                                        <img src="../../images/store/sectionimage/{{$picture->img2}}" />
+                                        <img src="../../images/store/sectionimage/{{$picture->picture2}}" />
                                         <div class="carousel-caption">
                                             <h3>Second slide label</h3>
                                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                                         </div>
                                     </div>
                                     @endif
-                                    @if( $picture->img3 !=NULL  )
+                                    @if( $picture->picture3 !=NULL  )
                                     <div class="item">
-                                        <img src="../../images/store/sectionimage/{{$picture->img3}}" />
+                                        <img src="../../images/store/sectionimage/{{$picture->picture3}}" />
                                         <div class="carousel-caption">
                                             <h3>Second slide label</h3>
                                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                                         </div>
                                     </div>
                                     @endif
-                                    @if( $picture->img4 !=NULL  )
+                                    @if( $picture->picture4 !=NULL  )
                                     <div class="item">
-                                        <img src="../../images/store/sectionimage/{{$picture->img4}}" />
+                                        <img src="../../images/store/sectionimage/{{$picture->picture4}}" />
                                         <div class="carousel-caption">
                                             <h3>Second slide label</h3>
                                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                                         </div>
                                     </div>
                                     @endif
-                                    @if( $picture->img5 !=NULL  )
+                                    @if( $picture->picture5 !=NULL  )
                                     <div class="item">
-                                        <img src="../../images/store/sectionimage/{{$picture->img5}}" />
+                                        <img src="../../images/store/sectionimage/{{$picture->picture5}}" />
                                         <div class="carousel-caption">
                                             <h3>Second slide label</h3>
                                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                                         </div>
                                     </div>
                                     @endif
-                                    @if( $picture->img6 !=NULL  )
+                                    @if( $picture->picture6 !=NULL  )
                                     <div class="item">
-                                        <img src="../../images/store/sectionimage/{{$picture->img6}}" />
+                                        <img src="../../images/store/sectionimage/{{$picture->picture6}}" />
                                         <div class="carousel-caption">
                                             <h3>Second slide label</h3>
                                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                                         </div>
                                     </div>
                                     @endif
-                                    @if( $picture->img7 !=NULL  )
+                                    @if( $picture->picture7 !=NULL  )
                                     <div class="item">
-                                        <img src="../../images/store/sectionimage/{{$picture->img7}}" />
+                                        <img src="../../images/store/sectionimage/{{$picture->picture7}}" />
                                         <div class="carousel-caption">
                                             <h3>Second slide label</h3>
                                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                                         </div>
                                     </div>
                                     @endif
-                                    @if( $picture->img8 !=NULL  )
+                                    @if( $picture->picture8 !=NULL  )
                                     <div class="item">
-                                        <img src="../../images/store/sectionimage/{{$picture->img8}}" />
+                                        <img src="../../images/store/sectionimage/{{$picture->picture8}}" />
                                         <div class="carousel-caption">
                                             <h3>Second slide label</h3>
                                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                                         </div>
                                     </div>
                                     @endif
-                                    @if( $picture->img9 !=NULL  )
+                                    @if( $picture->picture9 !=NULL  )
                                     <div class="item">
-                                        <img src="../../images/store/sectionimage/{{$picture->img9}}" />
+                                        <img src="../../images/store/sectionimage/{{$picture->picture9}}" />
                                         <div class="carousel-caption">
                                             <h3>Second slide label</h3>
                                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                                         </div>
                                     </div>
                                     @endif
-                                    @if( $picture->img10 !=NULL  )
+                                    @if( $picture->picture10 !=NULL  )
                                     <div class="item">
-                                        <img src="../../images/store/sectionimage/{{$picture->img10}}" />
+                                        <img src="../../images/store/sectionimage/{{$picture->picture10}}" />
                                         <div class="carousel-caption">
                                             <h3>Second slide label</h3>
                                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                                         </div>
                                     </div>
                                     @endif
-                                    @if( $picture->img11 !=NULL  )
+                                    @if( $picture->picture11 !=NULL  )
                                     <div class="item">
-                                        <img src="../../images/store/sectionimage/{{$picture->img11}}" />
+                                        <img src="../../images/store/sectionimage/{{$picture->picture11}}" />
                                         <div class="carousel-caption">
                                             <h3>Second slide label</h3>
                                             <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>

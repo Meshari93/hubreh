@@ -41,9 +41,7 @@
               <form method="POST" action="{{ url('/property') }}" accept-charset="UTF-8" id="wizard_with_validation"
                 enctype="multipart/form-data">
                   {{ csrf_field() }}
-
                   @include ('property.property.form', ['submitButtonText' => 'Update'])
-
               </form>
             </div>
 
