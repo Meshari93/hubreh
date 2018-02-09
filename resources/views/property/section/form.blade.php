@@ -30,12 +30,12 @@
         </div>
     </div>
       <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 col-md-offset-2 m-t-30 m-b-10">
-        <h5>price</h5>
+        <h5>Price</h5>
     </div>
       <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 col-md-offset-2 m-b-30">
         <div class="form-group form-float {{ $errors->has('typical_day') ? 'has-error' : ''}}">
             <div class="form-line">
-                <input   class="form-control"  name="typical_day" type="number" id="typical_day" value="" >
+                <input class="form-control" name="typical_day" type="number" id="typical_day" value="{{ $section->price->typical_day or ''}}" >
                   {!! $errors->first('typical_day', '<p class="help-block">:message</p>') !!}
                 <label class="form-label">Price typical day</label>
             </div>
@@ -44,7 +44,7 @@
       <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 col-md-offset-2 m-b-30">
         <div class="form-group form-float {{ $errors->has('weekend') ? 'has-error' : ''}}">
             <div class="form-line">
-                <input   class="form-control"  name="weekend" type="number" id="weekend" value="" >
+                <input   class="form-control"  name="weekend" type="number" id="weekend" value="{{ $section->price->weekend or ''}}" >
                   {!! $errors->first('weekend', '<p class="help-block">:message</p>') !!}
                 <label class="form-label">Price weekend day</label>
             </div>
@@ -53,7 +53,7 @@
       <div class="col-lg-7 col-md-7 col-sm-7 col-xs-6 col-md-offset-2 m-b-30">
         <div class="form-group form-float {{ $errors->has('feast') ? 'has-error' : ''}}">
             <div class="form-line">
-                <input   class="form-control"  name="feast" type="number" id="feast" value="" >
+                <input   class="form-control"  name="feast" type="number" id="feast" value="{{ $section->price->feast or ''}}" >
                   {!! $errors->first('feast', '<p class="help-block">:message</p>') !!}
                 <label class="form-label">Price feast day</label>
             </div>
@@ -64,15 +64,24 @@
       <div class="form-group form-float {{ $errors->has('serves') ? 'has-error' : ''}}">
         <label class="form-label">serves</label>
             <select id="optgroup" class="ms" multiple="multiple" name="serves[]">
-                <optgroup label=" المرافق ">
-                  @foreach ($serves as $key)
-                  <option value="{{ $key->id }}">{{ $key->serves }}</option>
-                  @endforeach
-                </optgroup>
+                <!-- <optgroup label="  "> -->
+
+                   @foreach ($idserves as $key)
+                    <option  value="{{ $key->id  }}">{{$key->id }} == {{$key->serves }}</option>
+                    @endforeach
+
+                     @foreach($idservessection as $serves )
+                      <option selected value="{{ $serves->id }}">{{$serves->id }} == {{$serves->serves}}</option>
+                     @endforeach
+
+               <!-- </optgroup> -->
             </select>
+
+
                 {!! $errors->first('serves', '<p class="help-block">:message</p>') !!}
       </div>
     </div>
+
   <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-md-offset-1 m-b-30 m-t-30">
       <div class="form-group form-float {{ $errors->has('user_id') ? 'has-error' : ''}}">
         <label class="form-label">Image :</label>
@@ -94,3 +103,5 @@
      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-offset-5 m-t-30">
          <input class="btn btn-primary" type="submit" value="{{ $submitButtonText or 'Create' }}">
     </div>
+<div class="col-lg-12 col-md-12 col-sm-12 ">
+</div>

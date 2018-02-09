@@ -46,4 +46,9 @@ class Section extends Model
     {
       return $this->hasMany('App\Picture', 'section_id');
     }
+
+    public function price()
+    {
+      return $this->hasOne('App\Price', 'section_id');
+    }
 }

@@ -177,7 +177,10 @@ class PropertyController extends Controller
     }
     public function createsection($property_id)
     {
-      $serves = Serf::all();
-          return view('property.section.create', compact('property_id', 'serves' )) ;
+      // $serves = Serf::select('id', 'type','serves')->orderBy('type', 'desc')->get();
+      $idserves = Serf::all();
+      $idservessection =array();
+// 'idserves','idservessection'
+          return view('property.section.create', compact('property_id', 'idserves', 'idservessection')) ;
     }
 }

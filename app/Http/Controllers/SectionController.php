@@ -11,7 +11,6 @@ use App\Property;
 use App\Price;
 use App\Serf;
 use App\Picture;
-
 use DB;
 
 use Illuminate\Http\Request;
@@ -29,23 +28,6 @@ class SectionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-
-    // public function index(Request $request)
-    // {
-    //     $keyword = $request->get('search');
-    //     $perPage = 25;
-    //
-    //     if (!empty($keyword)) {
-    //         $section = Section::where('name', 'LIKE', "%$keyword%")
-    //             ->orWhere('room_num', 'LIKE', "%$keyword%")
-    //             ->orWhere('property_id', 'LIKE', "%$keyword%")
-    //             ->paginate($perPage);
-    //     } else {
-    //         $section = Section::paginate($perPage);
-    //     }
-    //
-    //     return view('property.section.index', compact('section'));
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -143,8 +125,43 @@ class SectionController extends Controller
 
         $section = Section::findOrFail($id);
         $section_id = $section->property_id;
-        $serves = Serf::where('type', '=' ,'utility')->get();
-        return view('property.section.edit', compact('section', 'section_id','serves'));
+        // $serves = Serf::where('type', '=' ,'utility')->get();
+        $serves = Serf::select('id', 'type','serves')->orderBy('type', 'desc')->get();
+        $rer = $section->serves;
+
+        $servessection = array();
+        $servid = array();
+
+          // foreach ($serves as $idserv) {
+          //   foreach ($rer as $key ) {if ($idserv->id == $key->id) {$servessection[] = $key->id;}}
+          // }
+          //
+          // $idservessection  = array();
+          // foreach ($servessection as $key ) {foreach ($serves as $idserv) {if ($key == $idserv->id) { $idservessection[] = $idserv;}}}
+          //
+          // if (count($rer) == 0) {foreach ($serves as $idserv) {$servid[] = $idserv->id;}}
+          // if (count($rer) != 0) {foreach ($serves as $idserv) {
+          //   foreach ($servessection as $key ) {if ($idserv->id != $key) {$servid[] = $idserv->id;}}}}
+          //
+          //   $result = array_diff($servid, $servessection);
+          //   $servesID = array_unique($result);
+          //
+          //   $idserves  = array();
+          //   foreach ($servesID as $key) { foreach ($serves as $idserv) {if ($key == $idserv->id) {$idserves[] = $idserv;}}}
+
+
+           foreach ($rer as $key ){$servessection[] = $key->id;}
+
+         $idservessection  = array();
+         foreach ($servessection as $key ){foreach ($serves as $idserv){if ($key == $idserv->id){$idservessection[] = $idserv; }}}
+
+         foreach ($serves as $idserv){ $servid[] = $idserv->id;}
+
+           $result = array_diff($servid, $servessection);
+           $servesID = array_unique($result);
+           $idserves  = array();foreach ($servesID as $key){foreach ($serves as $idserv){if ($key == $idserv->id){$idserves[] = $idserv;}}}
+
+           return view('property.section.edit', compact('section', 'section_id','idserves','idservessection'));
     }
 
     /**
@@ -167,15 +184,13 @@ class SectionController extends Controller
         $prise = Price::where('section_id', '=', $id);
         $prise->update($sectionprise);
 
-        $sectionprise = $request->only(['typical_day', 'weekend', 'feast']);
-        $prise = Price::where('section_id', '=', $id);
-        $prise->update($sectionprise);
 
 
       $filename = $request->only(['file1']);
         $i = 0;
        $sectionimage = Picture::where('section_id', '=', $id);
-        if ($request->hasFile('file1')) {
+        if ($request->hasFile('file1'))
+        {
            foreach ($request->file1 as $imagename) {
              if ($i > 11) { break; }
              $i = $i + 1;
@@ -183,11 +198,18 @@ class SectionController extends Controller
              $filename =  time() . $i . '.' . $imagename->getClientOriginalExtension();
              Image::make($imagename)->resize(1920, 1080)->save(public_path('/images/store/sectionimage/') . $filename);
              $sectionimage = Picture::where('section_id', '=', $id)->update([$img => $filename]);
-          }
            }
-           $requestsection = $request->only(['serves']);
+         }
 
-         // dd($section->property_id);
+           $serves_id = $request->get('serves');
+           // $section->serves()->updateExistingPivot($id, $serves_id);
+
+
+           $section->serves()->sync( (array) $serves_id  );
+           // $section->serves($serves_id) ;
+
+
+         dd($filename);
         // $sectionprise = Price::findOrFail($section_id);
          return redirect('property/' . $section->property_id)->with('flash_message', 'Section updated!');
     }
