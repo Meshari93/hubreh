@@ -9,7 +9,6 @@
                     <div class="panel-body">
                         Your application's dashboard.
 
-
                     </div>
                 </div>
             </div>

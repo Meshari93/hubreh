@@ -47,6 +47,7 @@
                     </a>
                 </li>
                 <!-- admin li -->
+                  @role('admin')
                 <li>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">people</i>
@@ -69,11 +70,13 @@
                         </li>
                     </ul>
                 </li>
+                  @endrole
                 <li>
                     <a href="javascript:void(0);" class="menu-toggle">
                         <i class="material-icons">home</i>
                         <span>Property</span>
                     </a>
+
                     <ul class="ml-menu">
                         <li>
                             <a href="{{ url('property') }}">
@@ -82,9 +85,11 @@
                             <!-- <a href="{{ url('section') }}">
                                 <span>Section</span>
                             </a> -->
+                            @role('admin')
                             <a href="{{ url('serves') }}">
                                 <span>Serves</span>
                             </a>
+                            @endrole
                         </li>
                     </ul>
                 </li>

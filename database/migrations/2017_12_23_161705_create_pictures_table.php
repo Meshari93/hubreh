@@ -15,7 +15,6 @@ class CreatePicturesTable extends Migration
     {
         Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('picture_serch')->nullable();
             $table->string('picture1')->nullable();
             $table->string('picture2')->nullable();
             $table->string('picture3')->nullable();

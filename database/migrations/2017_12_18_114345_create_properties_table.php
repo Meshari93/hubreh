@@ -21,6 +21,7 @@ class CreatePropertiesTable extends Migration
             $table->integer('poryorty')->nullable();
             $table->time('time_entry')->nullable();
             $table->time('time_out')->nullable();
+            $table->string('picture_home')->nullable();
             $table->string('status')->nullable();
             $table->integer('evaluation')->nullable();
             $table->text('describstion')->nullable();

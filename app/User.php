@@ -10,10 +10,6 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
 
-  public function propertys()
-  {
-      return $this->hasMany('App\Property');
-  }
     use Notifiable, HasRoles;
     /**
      * The attributes that are mass assignable.
@@ -40,5 +36,19 @@ class User extends Authenticatable
       }
     }
 
+
+    public function propertys()
+    {
+        return $this->hasMany('App\Property');
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany('App\Favorite');
+    }
+    public function comments()
+    {
+        return $this->hasMany('App\User','property_id');
+    }
 
 }

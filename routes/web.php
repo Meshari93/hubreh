@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index')->name('welcome');
 
 Auth::routes();
 
@@ -24,6 +22,7 @@ Route::group(['middleware' => ['role:admin']], function () {
   Route::resource('admin/permission', 'Admin\\PermissionController');
   Route::resource('admin/role', 'Admin\\RoleController');
   Route::resource('admin/user', 'Admin\\UserController');
+  Route::resource('admin/user', 'Admin\\UserController');
 
 });
 Route::resource('property', 'PropertyController');
@@ -32,3 +31,11 @@ Route::get('property/{section_id}/createsection', 'PropertyController@createsect
 Route::resource('section', 'SectionController');
 
 Route::resource('serves', 'ServesController');
+
+//Ounre Controller
+Route::post('addRole', 'Admin\\UserController@addRole')->name('addOner');
+// Route::get('property/{section_id}/createsection', 'PropertyController@createsection');
+// Favorites Controller
+Route::post('/addfavorites', 'FavoritesController@store')->name('addfavorites');
+// Comment Controller
+Route::post('/addComment', 'CommentController@store')->name('addComment');

@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Image;
+use App\Picture;
+
+
 use App\Property;
 use App\Serf;
 use Auth;
@@ -92,7 +96,7 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-
+      
               $property = new Property;
 
               $property->name = $request->name;
@@ -107,10 +111,23 @@ class PropertyController extends Controller
               $property->evaluation = 0;
               $property->describstion = $request->describstion;
               $property->num_section = 0;
-              $property->save();
               $property_id = $property->id;
+ //////////////////////////////////////////////////////////////////
+                 if ($request->hasFile('file2')) {
+                   $imagename = $request->file2;
 
-              $serves = Serf::where('type', '=' ,'utility')->get();
+                     $filename =   $request->user_id . '-' .time() . '.' . $imagename->getClientOriginalExtension();
+                     Image::make($imagename)->resize(1024, 640)->save(public_path('/images/store/sectionimage/') . $filename);
+                     $property->picture_home                =  $filename;
+
+                   } else {
+                        $filename = 'avatar.png';
+                  }
+
+                  $property->save();
+ ///////////////////////////
+
+               $serves = Serf::where('type', '=' ,'utility')->get();
               return redirect('property/' . $property->id  ) ;
     }
 
@@ -155,8 +172,18 @@ class PropertyController extends Controller
     {
 
         $requestData = $request->all();
-
         $property = Property::findOrFail($id);
+        // $requestData = $request->except('picture_home');
+
+
+        if ($request->hasFile('file2')) {
+         $imagename = $request->file2;
+            $filename =   $property->user_id . '-' .time() . '.' . $imagename->getClientOriginalExtension();
+           Image::make($imagename)->resize(1024, 640)->save(public_path('/images/store/sectionimage/') . $filename);
+           $property->picture_home                =  $filename;
+
+         }
+
         $property->update($requestData);
 
         return redirect('property')->with('flash_message', 'Property updated!');

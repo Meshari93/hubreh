@@ -82,7 +82,7 @@
       </div>
     </div>
 
-  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-md-offset-1 m-b-30 m-t-30">
+  <!-- <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-md-offset-1 m-b-30 m-t-30">
       <div class="form-group form-float {{ $errors->has('user_id') ? 'has-error' : ''}}">
         <label class="form-label">Image :</label>
          <div action="{{ url('/section') }}" id="frmFileUpload" class="dropzone"  >
@@ -90,16 +90,25 @@
                 <div class="drag-icon-cph">
                     <i class="material-icons">touch_app</i>
                 </div>
-                <h3>Drop image here or click to upload.</h3>
-                <!-- <em>(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</em> -->
-            </div>
-            <div class="fallback">
-                 <!-- <input name="file1[]" type="file" multiple> -->
-            </div>
+                <h3>Drop image here or click to upload.</h3> -->
+                <!-- ////////<em>(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</em> -->
+            <!-- </div>
+            <div class="fallback"> -->
+                 <!-- //////<input name="file1[]" type="file" multiple> -->
+            <!-- </div>
         </div>
     </div>
+  </div> -->
+
+  
+  <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-md-offset-1 m-b-30 m-t-30">
+      <div class="form-group form-float {{ $errors->has('user_id') ? 'has-error' : ''}}">
+        <label class="form-label">Section  Picture:</label>
+           <input name="file1[]" type="file" multiple>
+    </div>
   </div>
-  <input name="file1[]" type="file" multiple>
+
+
      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 col-md-offset-5 m-t-30">
          <input class="btn btn-primary" type="submit" value="{{ $submitButtonText or 'Create' }}">
     </div>

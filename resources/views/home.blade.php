@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+<body class="theme-red">
 <!-- Page Loader -->
 
-    <!-- #END# Page Loader -->
+     <!-- #END# Page Loader -->
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
     <!-- #END# Overlay For Sidebars -->
@@ -263,6 +264,14 @@
             <!-- Menu -->
             <div class="menu">
                 <ul class="list">
+                  <li style="padding: 5px;text-align:  center;">
+
+                    <form method="post" action="{{ url('addRole') }}" accept-charset="UTF-8" style="display:inline">
+                        {{ csrf_field() }}
+                        <input name="roles" value="owner" hidden>
+                        <button type="submit" class="btn btn-primary waves-effect" title="Add owner"><i class="fa fa-trash-o" aria-hidden="true"></i> Owner</button>
+                    </form>
+                     </li>
                     <li class="header">MAIN NAVIGATION</li>
                     <li class="active">
                         <a href="index.html">

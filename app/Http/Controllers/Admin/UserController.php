@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use App\Property;
 
@@ -112,7 +113,7 @@ class UserController extends Controller
         if ($request->roles !== NULL) {
           $user->syncRoles($request->roles);
         }
-        return redirect('admin/user')->with('flash_message', 'User updated!');
+         return redirect('admin/user')->with('flash_message', 'User updated!');
     }
 
     /**
@@ -127,5 +128,21 @@ class UserController extends Controller
         User::destroy($id);
 
         return redirect('admin/user')->with('flash_message', 'User deleted!');
+    }
+
+
+    /**
+     * Convert User to Ouner Role
+     *
+     * @param  int  $id
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function addRole(Request $request)
+    {
+        $id = Auth::id();
+        $user = User::findOrFail($id);
+        $user->syncRoles($request->roles);
+        return redirect('/home')->with('flash_message', 'User deleted!');
     }
 }

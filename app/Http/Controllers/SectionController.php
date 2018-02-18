@@ -78,8 +78,8 @@ class SectionController extends Controller
             $i = $i + 1;
             $img = 'picture' .$i;
             // $imagename  = $request->file1[0];
-            $filename =  time() . $i . '.' . $imagename->getClientOriginalExtension();
-            Image::make($imagename)->resize(1920, 1080)->save(public_path('/images/store/sectionimage/') . $filename);
+            $filename = $request->property_id .'-'. $sectionprise_id . '-'. time() . $i . '.' . $imagename->getClientOriginalExtension();
+            Image::make($imagename)->resize(1024, 640)->save(public_path('/images/store/sectionimage/') . $filename);
             $sectionimage-> $img                =  $filename;
          }
           } else {
@@ -196,7 +196,7 @@ class SectionController extends Controller
              $i = $i + 1;
              $img = 'picture' .$i;
              $filename =  time() . $i . '.' . $imagename->getClientOriginalExtension();
-             Image::make($imagename)->resize(1920, 1080)->save(public_path('/images/store/sectionimage/') . $filename);
+             Image::make($imagename)->resize(1024, 640)->save(public_path('/images/store/sectionimage/') . $filename);
              $sectionimage = Picture::where('section_id', '=', $id)->update([$img => $filename]);
            }
          }
@@ -209,7 +209,7 @@ class SectionController extends Controller
            // $section->serves($serves_id) ;
 
 
-         dd($filename);
+         // dd($filename);
         // $sectionprise = Price::findOrFail($section_id);
          return redirect('property/' . $section->property_id)->with('flash_message', 'Section updated!');
     }

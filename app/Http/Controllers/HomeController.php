@@ -23,11 +23,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-      if (auth()->user()->hasRole('admin')) {
+      if (auth()->user()->hasRole('admin') ) {
       return redirect('admin/dashboard');
+      }
+      elseif (auth()->user()->hasRole('owner') ) {
+      return redirect('/property');
       }
       else {
         return view('home');
       }
+    }
+    public function welcome()
+    {
+
+        return view('welcome');
+
     }
 }

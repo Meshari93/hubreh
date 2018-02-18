@@ -43,5 +43,15 @@ class Property extends Model
       return $this->hasMany('App\Section', 'property_id');
   }
 
+  public function favorites()
+  {
+      return $this->hasMany('App\Favorite','property_id');
+  }
+
+  public function comments()
+  {
+      return $this->hasMany('App\Comment','property_id');
+  }
+
 
 }

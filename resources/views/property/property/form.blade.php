@@ -65,6 +65,12 @@
                 </div>
              </div>
              </div>
+             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-md-offset-1 m-b-30 m-t-30">
+                 <div class="form-group form-float {{ $errors->has('user_id') ? 'has-error' : ''}}">
+                   <label class="form-label">Home Picture of Property:</label>
+                     <input name="file2" type="file" multiple name="Home Picture" >
+               </div>
+             </div>
 </fieldset>
 
 <!-- //////////////////////////////////////// -->
@@ -104,4 +110,3 @@
        </div>
     </div>
 </fieldset>
- 

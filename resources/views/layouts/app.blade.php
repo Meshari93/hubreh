@@ -18,17 +18,21 @@
     <link href="{{ asset('/js/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet">
 </head>
 
-<body class="theme-red">
-        @role('admin')
+        @role('admin|owner')
+         <body class="theme-red">
             @include('admin.layouts.headadmin')
             @include('admin.layouts.sidebar')
             </section>
         @endrole
+        @role('admin|owner')
     <section class="content">
         <div class="container-fluid">
+        @endrole
         @yield('content')
+        @role('admin|owner')
         </div>
     </section>
+    @endrole
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
 
