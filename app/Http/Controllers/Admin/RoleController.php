@@ -53,6 +53,12 @@ class RoleController extends Controller
     public function store(Request $request)
     {
 
+      $validatedData = $request->validate([
+            'name' => 'required|alpha_dash|unique:roles|max:255',
+            'permissions' => 'required|max:255',
+         ]);
+
+
         $requestData = $request->except('permissions');
         $permissions=$request->permissions;
         if ($request->permissions !== NULL) {
@@ -101,6 +107,10 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $validatedData = $request->validate([
+            'name' => 'required|alpha_dash|unique:roles|max:255',
+            'permissions' => 'required|max:255',
+         ]);
 
         $requestData = $request->except('permissions');
         $permissions=$request->permissions;

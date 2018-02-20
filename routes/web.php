@@ -39,3 +39,5 @@ Route::post('addRole', 'Admin\\UserController@addRole')->name('addOner');
 Route::post('/addfavorites', 'FavoritesController@store')->name('addfavorites');
 // Comment Controller
 Route::post('/addComment', 'CommentController@store')->name('addComment');
+// Rating Controller
+Route::post('/addRating', 'RatingController@store')->name('addRating');

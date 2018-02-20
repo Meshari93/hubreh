@@ -23,6 +23,22 @@ class SectionController extends Controller
       $this->middleware('auth');
   }
 
+  
+  public function rules()
+  {
+    $rules = [
+      'name' => 'required|max:255',
+    ];
+
+    foreach($this->request->get('items') as $key => $val)
+    {
+      $rules['items.'.$key] = 'required|max:10';
+    }
+
+    return $rules;
+  }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -50,6 +66,20 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
+      $validatedData = $request->validate([
+        'name' => 'required|alpha_dash|max:191',
+        'room_num' => 'required|integer',
+        'capacity' => 'required|integer',
+        'property_id' => 'required|integer',
+
+        'typical_day' => 'required|integer',
+        'weekend' => 'required|integer',
+        'feast' => 'required|integer',
+        'feast' => 'required|integer',
+        'file1.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+          ]);
+
+
       $section = new Section;
       $section->name        = $request->name;
       $section->room_num    = $request->room_num;
@@ -132,25 +162,7 @@ class SectionController extends Controller
         $servessection = array();
         $servid = array();
 
-          // foreach ($serves as $idserv) {
-          //   foreach ($rer as $key ) {if ($idserv->id == $key->id) {$servessection[] = $key->id;}}
-          // }
-          //
-          // $idservessection  = array();
-          // foreach ($servessection as $key ) {foreach ($serves as $idserv) {if ($key == $idserv->id) { $idservessection[] = $idserv;}}}
-          //
-          // if (count($rer) == 0) {foreach ($serves as $idserv) {$servid[] = $idserv->id;}}
-          // if (count($rer) != 0) {foreach ($serves as $idserv) {
-          //   foreach ($servessection as $key ) {if ($idserv->id != $key) {$servid[] = $idserv->id;}}}}
-          //
-          //   $result = array_diff($servid, $servessection);
-          //   $servesID = array_unique($result);
-          //
-          //   $idserves  = array();
-          //   foreach ($servesID as $key) { foreach ($serves as $idserv) {if ($key == $idserv->id) {$idserves[] = $idserv;}}}
-
-
-           foreach ($rer as $key ){$servessection[] = $key->id;}
+            foreach ($rer as $key ){$servessection[] = $key->id;}
 
          $idservessection  = array();
          foreach ($servessection as $key ){foreach ($serves as $idserv){if ($key == $idserv->id){$idservessection[] = $idserv; }}}
@@ -174,6 +186,18 @@ class SectionController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $validatedData = $request->validate([
+        'name' => 'required|alpha_dash|max:191',
+        'room_num' => 'required|integer|max:10',
+        'capacity' => 'required|integer|max:10',
+        'property_id' => 'required|integer|max:10',
+
+        'typical_day' => 'required|integer|max:10',
+        'weekend' => 'required|integer|max:10',
+        'feast' => 'required|integer|max:10',
+        'feast' => 'required|integer|max:10',
+        'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+          ]);
 
         // $requestData = $request->all();
         $requestsection = $request->only(['name', 'room_num', 'capacity']);

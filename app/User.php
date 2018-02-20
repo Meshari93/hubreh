@@ -48,7 +48,12 @@ class User extends Authenticatable
     }
     public function comments()
     {
-        return $this->hasMany('App\User','property_id');
+        return $this->hasMany('App\Comment','user_id');
+    }
+
+    public function rating()
+    {
+        return $this->hasMany('App\Rating', 'user_id');
     }
 
 }

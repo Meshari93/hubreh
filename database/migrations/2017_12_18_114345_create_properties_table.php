@@ -23,7 +23,8 @@ class CreatePropertiesTable extends Migration
             $table->time('time_out')->nullable();
             $table->string('picture_home')->nullable();
             $table->string('status')->nullable();
-            $table->integer('evaluation')->nullable();
+            $table->integer('rating')->nullable();
+            $table->integer('num_rating')->nullable();
             $table->text('describstion')->nullable();
             $table->integer('num_section')->nullable();
             $table->integer('user_id')->unsigned();

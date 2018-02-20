@@ -50,7 +50,11 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
 
+
         $requestData = $request->all();
+         $validatedData = $request->validate([
+              'name' => 'required|unique:permissions|max:255',
+            ]);
 
         Permission::create($requestData);
 
@@ -95,6 +99,9 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $validatedData = $request->validate([
+           'name' => 'required|alpha_dash|unique:permissions|max:255',
+         ]);
 
         $requestData = $request->all();
 

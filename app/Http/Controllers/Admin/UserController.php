@@ -58,6 +58,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+      $validatedData = $request->validate([
+        'first_name' => 'required|alpha|max:255',
+        'last_name' => 'required|alpha|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8',
+         ]);
 
         $requestData = $request->except('roles');
         $roles = $request->roles;
@@ -106,6 +112,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $validatedData = $request->validate([
+        'first_name' => 'required|alpha|max:255',
+        'last_name' => 'required|alpha|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8',
+         ]);
 
         $requestData = $request->all();
         $user = User::findOrFail($id);
@@ -140,7 +152,10 @@ class UserController extends Controller
      */
     public function addRole(Request $request)
     {
-        $id = Auth::id();
+      $validatedData = $request->validate([
+        'roles' => 'required|string',
+          ]);
+         $id = Auth::id();
         $user = User::findOrFail($id);
         $user->syncRoles($request->roles);
         return redirect('/home')->with('flash_message', 'User deleted!');

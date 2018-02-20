@@ -26,7 +26,7 @@ class Property extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'type', 'phon_num_one', 'phon_num_two', 'poryorty', 'time_entry', 'time_out', 'status', 'evaluation', 'describstion', 'num_section'];
+    protected $fillable = ['name', 'type', 'phon_num_one', 'phon_num_two', 'poryorty', 'time_entry', 'time_out', 'status', 'rating', 'num_rating','describstion', 'num_section'];
 
     public function owner()
 	{
@@ -51,6 +51,11 @@ class Property extends Model
   public function comments()
   {
       return $this->hasMany('App\Comment','property_id');
+  }
+
+  public function ratings()
+  {
+      return $this->hasMany('App\Rating','property_id');
   }
 
 

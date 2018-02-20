@@ -38,8 +38,10 @@ class FavoritesController extends Controller
      */
     public function store(Request $request)
     {
+      $validatedData = $request->validate([
+             'propertyId' => 'required|integer',
+          ]);
 
-     
       $propertyId     = $request->propertyId;
       $favorite =  Favorite::where('property_id', '=', $propertyId)
         ->where('user_id', '=', Auth::user()->id )->first();

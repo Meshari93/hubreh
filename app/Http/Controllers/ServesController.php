@@ -53,6 +53,10 @@ class ServesController extends Controller
      */
     public function store(Request $request)
     {
+      $validatedData = $request->validate([
+        'serves' => 'required|alpha_dash|max:191',
+        'type' => 'required',
+          ]);
 
         $requestData = $request->all();
 

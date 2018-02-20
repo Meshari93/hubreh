@@ -99,9 +99,8 @@
 <!-- ///////////////////////////////////////////// -->
  <div class="signup-box">
         <div class="logo">
-            <a href="javascript:void(0);">Admin<b>BSB</b></a>
-            <small>Admin BootStrap Based - Material Design</small>
-        </div>
+            <a href="javascript:void(0);">HUN<b>REH</b></a>
+         </div>
         <div class="card">
             <div class="body">
                 <!-- <form id="sign_up" method="POST"> -->
@@ -109,29 +108,29 @@
                       {{ csrf_field() }}
                     <div class="msg">Register a new membership</div>
                       <!-- //////////////////////////// -->
-                    <div class="input-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    <div class="input-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autofocus>
-                            @if ($errors->has('name'))
+                            <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{ old('first_name') }}"    autofocus>
+                            @if ($errors->has('first_name'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong>{{ $errors->first('first_name') }}</strong>
                                 </span>
                             @endif
                         </div>
                     </div>
                       <!-- //////////////////////////// -->
-                    <div class="input-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                    <div class="input-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="last_name" placeholder="Last Name"value="{{ old('last_name') }}" required autofocus>
-                            @if ($errors->has('name'))
+                            <input type="text" class="form-control" name="last_name" placeholder="Last Name"value="{{ old('last_name') }}"   autofocus>
+                            @if ($errors->has('last_name'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('name') }}</strong>
+                                    <strong>{{ $errors->first('last_name') }}</strong>
                                 </span>
                             @endif
                         </div>
@@ -156,7 +155,7 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                            <input type="password" class="form-control" name="password" minlength="6" placeholder="Password" required>
+                            <input type="password" class="form-control" name="password" minlength="8" placeholder="Password" required>
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
@@ -170,13 +169,20 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                            <input type="password" class="form-control" name="password_confirmation" minlength="6" placeholder="Confirm Password" required>
-                        </div>
+                            <input type="password" class="form-control" name="password_confirmation" minlength="8" placeholder="Confirm Password" required>
+
+                         </div>
                     </div>
                       <!-- //////////////////////////// -->
-                    <div class="form-group">
+                    <div class="form-group{{ $errors->has('terms') ? ' has-error' : '' }}">
                         <input type="checkbox" name="terms" id="terms" class="filled-in chk-col-pink">
-                        <label for="terms">I read and agree to the <a href="javascript:void(0);">terms of usage</a>.</label>
+
+                          <label for="terms">I read and agree to the <a href="javascript:void(0);">terms of usage</a>.</label>
+                          @if ($errors->has('terms'))
+                              <span class="help-block">
+                                  <strong>{{ $errors->first('terms') }}</strong>
+                              </span>
+                          @endif
                     </div>
                       <!-- //////////////////////////// -->
 

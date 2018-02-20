@@ -96,25 +96,40 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-      
+      $validatedData = $request->validate([
+        'name' => 'required|alpha_dash|max:191',
+        'user_id' => 'required|integer|max:10',
+        'type' => 'required|alpha_dash|max:191',
+        'phon_num_one' => 'required|integer',
+        'phon_num_two' => 'integer',
+        'time_entry' => 'required|string',
+        'time_out' => 'required|string',
+        'describstion' => 'required|alpha_dash|max:500',
+         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+         ]);
               $property = new Property;
-
               $property->name = $request->name;
-              $property->user_id = $request->user_id;
+               if (Auth::user()->hasRole('admin')) {
+                $property->user_id = $request->user_id;
+              }
+              else {
+                $property->user_id = Auth::user()->id;
+              }
               $property->type = $request->type;
               $property->phon_num_one = $request->phon_num_one;
               $property->phon_num_two = $request->phon_num_two;
               $property->poryorty = 0;
               $property->time_entry = $request->time_entry;
               $property->time_out = $request->time_out;
-              $property->status = 'actev';
-              $property->evaluation = 0;
+              $property->status = 'In Progres';
+              $property->rating = 0;
+              $property->num_rating = 0;
               $property->describstion = $request->describstion;
               $property->num_section = 0;
               $property_id = $property->id;
  //////////////////////////////////////////////////////////////////
-                 if ($request->hasFile('file2')) {
-                   $imagename = $request->file2;
+                 if ($request->hasFile('image')) {
+                   $imagename = $request->image;
 
                      $filename =   $request->user_id . '-' .time() . '.' . $imagename->getClientOriginalExtension();
                      Image::make($imagename)->resize(1024, 640)->save(public_path('/images/store/sectionimage/') . $filename);
@@ -170,14 +185,25 @@ class PropertyController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $validatedData = $request->validate([
+        'name' => 'required|alpha_dash|max:191',
+        'user_id' => 'required|integer|max:10',
+        'type' => 'required|alpha_dash|max:191',
+        'phon_num_one' => 'required|integer',
+        'phon_num_two' => 'integer',
+        'time_entry' => 'required|string',
+        'time_out' => 'required|string',
+        'describstion' => 'required|alpha_dash|max:500',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+         ]);
 
         $requestData = $request->all();
         $property = Property::findOrFail($id);
         // $requestData = $request->except('picture_home');
 
 
-        if ($request->hasFile('file2')) {
-         $imagename = $request->file2;
+        if ($request->hasFile('image')) {
+         $imagename = $request->image;
             $filename =   $property->user_id . '-' .time() . '.' . $imagename->getClientOriginalExtension();
            Image::make($imagename)->resize(1024, 640)->save(public_path('/images/store/sectionimage/') . $filename);
            $property->picture_home                =  $filename;

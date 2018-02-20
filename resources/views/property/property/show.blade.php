@@ -323,6 +323,133 @@
          </div>
       </div>
    @endforeach
+<!-- //////////////////////////// -->
+<div class="col-md-12">
+   <div class="panel panel-default">
+      <div class="panel-heading">Rating </div>
+      <div class="panel-body">
+        <form method="POST" action="{{ url('/addRating') }}" accept-charset="UTF-8"
+          enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <input type="text" name="property_id" value="{{$property->id}}" hidden>
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 ">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                     <div class=" form-group form-float {{ $errors->has('cleanliness') ? 'has-error' : ''}} ">
+                       <!-- <div class="form-line"> -->
+                       <label class="form-label">
+                       Cleanliness:
+                       </label>
+                       <div class="demo-radio-button" style="min-width:70px;">
+                          <input name="cleanliness" type="radio" id="cradio_31" value="5" class="with-gap radio-col-pink"  required />
+                          <label for="cradio_31" style="min-width:70px;">5</label>
+                          <input name="cleanliness" type="radio" id="radio_35" value="4" class="with-gap radio-col-blue" />
+                          <label for="cradio_35" style="min-width:70px;">4</label>
+                          <input name="cleanliness" type="radio" id="cradio_39" value="3" class="with-gap radio-col-green"  />
+                          <label for="cradio_39" style="min-width:70px;">3</label>
+                          <input name="cleanliness" type="radio" id="cradio_46" value="2" class="with-gap radio-col-brown" />
+                          <label for="cradio_46" style="min-width:70px;">2</label>
+                          <input name="cleanliness" type="radio" id="cradio_47" value="1" class="with-gap radio-col-red" />
+                          <label for="cradio_47" style="min-width:70px;">1</label>
+                       </div>
+                       {!! $errors->first('cleanliness', '<p class="help-block">:message</p>') !!}
+                       <!-- </div> -->
+                    </div>
+
+                     <div class=" form-group form-float {{ $errors->has('place') ? 'has-error' : ''}} ">
+                       <!-- <div class="form-line"> -->
+                       <label class="form-label">
+                       Place:
+                       </label>
+                       <div class="demo-radio-button " style="min-width:70px;">
+                          <input name="place" type="radio" id="lradio_31" value="5" class="with-gap radio-col-pink" required  />
+                          <label for="lradio_31" style="min-width:70px;">5</label>
+                          <input name="place" type="radio" id="lradio_35" value="4" class="with-gap radio-col-blue" />
+                          <label for="lradio_35" style="min-width:70px;">4</label>
+                          <input name="place" type="radio" id="lradio_39" value="3" class="with-gap radio-col-green"  />
+                          <label for="lradio_39" style="min-width:70px;">3</label>
+                          <input name="place" type="radio" id="lradio_46" value="2" class="with-gap radio-col-brown" />
+                          <label for="lradio_46" style="min-width:70px;">2</label>
+                          <input name="place" type="radio" id="lradio_47" value="1" class="with-gap radio-col-red" />
+                          <label for="lradio_47" style="min-width:70px;">1</label>
+                       </div>
+                       {!! $errors->first('place', '<p class="help-block">:message</p>') !!}
+                       <!-- </div> -->
+                    </div>
+
+                     <div class=" form-group {{ $errors->has('price') ? 'has-error' : ''}} form-float ">
+                       <!-- <div class="form-line"> -->
+                       <label class="form-label">
+                       Price:
+                       </label>
+                       <div class="demo-radio-button " style="min-width:70px;">
+                          <input name="price" type="radio" id="pradio_31" value="5" class="with-gap radio-col-pink"  required />
+                          <label for="pradio_31" style="min-width:70px;">5</label>
+                          <input name="price" type="radio" id="pradio_35" value="4" class="with-gap radio-col-blue" />
+                          <label for="pradio_35" style="min-width:70px;">4</label>
+                          <input name="price" type="radio" id="pradio_39" value="3" class="with-gap radio-col-green"  />
+                          <label for="pradio_39" style="min-width:70px;">3</label>
+                          <input name="price" type="radio" id="pradio_46" value="2" class="with-gap radio-col-brown" />
+                          <label for="pradio_46" style="min-width:70px;">2</label>
+                          <input name="price" type="radio" id="pradio_47" value="1" class="with-gap radio-col-red" />
+                          <label for="pradio_47" style="min-width:70px;">1</label>
+                       </div>
+                       {!! $errors->first('price', '<p class="help-block">:message</p>') !!}
+                       <!-- </div> -->
+                    </div>
+
+                     <div class=" form-group {{ $errors->has('accompany') ? 'has-error' : ''}} form-float ">
+                       <!-- <div class="form-line"> -->
+                       <label class="form-label">
+                       Accompany:
+                       </label>
+                       <div class="demo-radio-button " style="min-width:70px;">
+                          <input name="accompany" type="radio" id="aradio_31" value="5" class="with-gap radio-col-pink"  required />
+                          <label for="aradio_31" style="min-width:70px;">5</label>
+                          <input name="accompany" type="radio" id="aradio_35" value="4" class="with-gap radio-col-blue" />
+                          <label for="aradio_35" style="min-width:70px;">4</label>
+                          <input name="accompany" type="radio" id="aradio_39" value="3" class="with-gap radio-col-green"  />
+                          <label for="aradio_39" style="min-width:70px;">3</label>
+                          <input name="accompany" type="radio" id="aradio_46" value="2" class="with-gap radio-col-brown" />
+                          <label for="aradio_46" style="min-width:70px;">2</label>
+                          <input name="accompany" type="radio" id="aradio_47" value="1" class="with-gap radio-col-red" />
+                          <label for="aradio_47" style="min-width:70px;">1</label>
+                       </div>
+                       {!! $errors->first('accompany', '<p class="help-block">:message</p>') !!}
+                       <!-- </div> -->
+                    </div>
+                     <div class=" form-group form-float {{ $errors->has('furniture') ? 'has-error' : ''}}  ">
+                       <!-- <div class="form-line"> -->
+                       <label class="form-label">
+                       Furniture:
+                       </label>
+                       <div class="demo-radio-button " style="min-width:70px;">
+                          <input name="furniture" type="radio" id="fradio_31" value="5" class="with-gap radio-col-pink" required  />
+                          <label for="fradio_31" style="min-width:70px;">5</label>
+                          <input name="furniture" type="radio" id="fradio_35" value="4" class="with-gap radio-col-blue" />
+                          <label for="fradio_35" style="min-width:70px;">4</label>
+                          <input name="furniture" type="radio" id="fradio_39" value="3" class="with-gap radio-col-green"  />
+                          <label for="fradio_39" style="min-width:70px;">3</label>
+                          <input name="furniture" type="radio" id="fradio_46" value="2" class="with-gap radio-col-brown" />
+                          <label for="fradio_46" style="min-width:70px;">2</label>
+                          <input name="furniture" type="radio" id="fradio_47" value="1" class="with-gap radio-col-red" />
+                          <label for="fradio_47" style="min-width:70px;">1</label>
+                       </div>
+                       {!! $errors->first('furniture', '<p class="help-block">:message</p>') !!}
+                       <!-- </div> -->
+                    </div>
+                      </div>
+                  <button class="btn btn-primary" type="submit">Rating</button>
+        </div>
+
+      </form>
+    <br>
+    <br>
+    <br>
+ </div>
+</div>
+</div>
+
+<!-- //////////////////////////// -->
 
    <div class="col-md-12">
       <div class="panel panel-default">
@@ -332,14 +459,12 @@
              enctype="multipart/form-data">
                {{ csrf_field() }}
            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-6 col-md-offset-1">
-            <div class="form-group   form-float {{ $errors->has('describstion') ? 'has-error' : ''}}">
+            <div class="form-group   form-float {{ $errors->has('comment') ? 'has-error' : ''}}">
               <div class="form-line">
                 <input type="text" name="property_id" value="{{$property->id}}" hidden>
-                 <textarea required maxlength="500" rows="3" class="form-control no-resize auto-growth" placeholder="Please type some Comment" name="comment" type="textarea" id="describstion" ></textarea>
-                 {!! $errors->first('describstion', '
-                 <p class="help-block">:message</p>
-                 ') !!}
+                 <textarea required  maxlength="500" rows="3" class="form-control no-resize   auto-growth" placeholder="Please type some Comment" name="comment" type="textarea" id="describstion" ></textarea>
               </div>
+              {!! $errors->first('comment', '<p class="help-block">:message</p>') !!}
            </div>
            </div>
               <div class="flot-right col-lg-2 col-md-2 col-sm-2 col-xs-2   m-t-30">

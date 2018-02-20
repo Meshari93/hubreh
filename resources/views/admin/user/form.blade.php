@@ -1,18 +1,18 @@
-<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
+<div class="form-group {{ $errors->has('first_name') ? 'has-error' : ''}}">
     {!! Form::label('name', 'First Name', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <div class="form-line"   >
-            {!! Form::text('first_name', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
-            {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+            {!! Form::text('first_name', null, ['class' => 'form-control', 'required' => 'required'] ) !!}
+            {!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
 </div>
-<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
+<div class="form-group {{ $errors->has('last_name') ? 'has-error' : ''}}">
     {!! Form::label('name', 'Last Name', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <div class="form-line"   >
-            {!! Form::text('last_name', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
-            {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+            {!! Form::text('last_name', null,  ['class' => 'form-control', 'required' => 'required']) !!}
+            {!! $errors->first('last_name', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
 </div>
@@ -20,7 +20,7 @@
     {!! Form::label('email', 'Email', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <div class="form-line"   >
-            {!! Form::email('email', null, ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+            {!! Form::email('email', null, ['class' => 'form-control', 'required' => 'required'] ) !!}
             {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
@@ -28,7 +28,7 @@
     {!! Form::label('password', 'Password', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         <div class="form-line"   >
-            {!! Form::password('password', ('' == 'required') ? ['class' => 'form-control', 'required' => 'required'] : ['class' => 'form-control']) !!}
+            {!! Form::password('password', ['class' => 'form-control', 'required' => 'required'] ) !!}
             {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
         </div>
     </div>

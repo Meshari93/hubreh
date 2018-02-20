@@ -3,24 +3,25 @@
  <fieldset>
 
 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8 col-md-offset-1">
-       <div class="form-group{{ $errors->has('name') ? 'has-error' : ''}} form-float">
+       <div class="form-group form-float {{ $errors->has('name') ? 'has-error' : ''}}">
           <div class="form-line">
-             <input class="form-control" name="name" type="text" id="name" value="{{ $property->name or ''}}">
+              <label class="form-label">Name property</label>
+             <input class="form-control" name="name" type="text" id="name" value="{{ $property->name or ''}}" required>
              {!! $errors->first('name', '
              <p class="help-block">:message</p>
              ') !!}
-             <label class="form-label">Name property</label>
+
           </div>
        </div>
        </div>
 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8 col-md-offset-1">
-           <div class=" form-group{{ $errors->has('type') ? 'has-error' : ''}} form-float ">
+           <div class=" form-group form-float {{ $errors->has('type') ? 'has-error' : ''}}" >
              <!-- <div class="form-line"> -->
              <label class="form-label">
              Type:
              </label>
              <div class="demo-radio-button">
-                <input name="type" type="radio" id="radio_31" value="hall_wedding" class="with-gap radio-col-pink"  {{ (isset($property->type) && $property->type == 'hall_wedding') ? 'checked' : ''}} />
+                <input name="type" type="radio" id="radio_31" value="hall_wedding" class="with-gap radio-col-pink"  required {{ (isset($property->type) && $property->type == 'hall_wedding') ? 'checked' : ''}} />
                 <label for="radio_31">Hall Wedding</label>
                 <input name="type" type="radio" id="radio_35" value="chale" class="with-gap radio-col-blue" {{ (isset($property->type) && $property->type == 'chale') ? 'checked' : ''}}/>
                 <label for="radio_35">Chalet</label>
@@ -36,8 +37,8 @@
           <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8 col-md-offset-1">
               <div class="form-group form-float {{ $errors->has('time_entry') ? 'has-error' : ''}}">
                 <div class="form-line">
-                   <input   class="form-control" name="time_entry" type="time" id="time_entry" value="{{ $property->time_entry or ''}}">
-                   <label class="form-label">Time Entry</label>
+                  <label class="form-label">Time Entry</label>
+                   <input   class="form-control" name="time_entry" type="time" id="time_entry" value="{{ $property->time_entry or ''}}" required >
                    {!! $errors->first('time_entry', '
                    <p class="help-block">:message</p>
                    ') !!}
@@ -45,10 +46,10 @@
              </div>
              </div>
              <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8 col-md-offset-1">
-               <div class="form-group{{ $errors->has('time_out') ? 'has-error' : ''}} form-float ">
+               <div class="form-group form-float {{ $errors->has('time_out') ? 'has-error' : ''}}">
                 <div class="form-line">
-                   <input   class="form-control" name="time_out" type="time" id="time_out" value="{{ $property->time_out or ''}}">
-                   <label class="form-label">Time Out</label>
+                  <label class="form-label">Time Out</label>
+                   <input   class="form-control" name="time_out" type="time" id="time_out" value="{{ $property->time_out or ''}}" required>
                    {!! $errors->first('time_out', '
                    <p class="help-block">:message</p>
                    ') !!}
@@ -58,7 +59,8 @@
              <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8 col-md-offset-1">
               <div class="form-group   form-float {{ $errors->has('describstion') ? 'has-error' : ''}}">
                 <div class="form-line">
-                   <textarea rows="3" class="form-control no-resize auto-growth" placeholder="Please type some describstiont" name="describstion" type="textarea" id="describstion" >{{ $property->describstion or ''}}</textarea>
+                  <label class="form-label">Describstiont</label>
+                   <textarea rows="3" class="form-control no-resize auto-growth" placeholder="Please type some describstiont" name="describstion" type="textarea" id="describstion" required>{{ $property->describstion or ''}}</textarea>
                    {!! $errors->first('describstion', '
                    <p class="help-block">:message</p>
                    ') !!}
@@ -66,9 +68,12 @@
              </div>
              </div>
              <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-md-offset-1 m-b-30 m-t-30">
-                 <div class="form-group form-float {{ $errors->has('user_id') ? 'has-error' : ''}}">
+                 <div class="form-group form-float {{ $errors->has('image') ? 'has-error' : ''}}">
                    <label class="form-label">Home Picture of Property:</label>
-                     <input name="file2" type="file" multiple name="Home Picture" >
+                     <input name="image" type="file" name="Home Picture" required>
+                     {!! $errors->first('image', '
+                     <p class="help-block">:message</p>
+                     ') !!}
                </div>
              </div>
 </fieldset>
@@ -76,10 +81,11 @@
 <!-- //////////////////////////////////////// -->
 <h3>User Information</h3>
  <fieldset>
+     @role('admin')
      <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8 col-md-offset-1">
         <div class="form-group form-float {{ $errors->has('user_id') ? 'has-error' : ''}}">
           <div class="form-line">
-             <input   class="form-control"  name="user_id" type="number" id="user_id" value="{{ $property->name or ''}}" >
+             <input   class="form-control"  name="user_id" type="number" id="user_id" value="{{ $property->name or ''}}" required>
              {!! $errors->first('user_id', '
              <p class="help-block">:message</p>
              ') !!}
@@ -87,10 +93,11 @@
           </div>
        </div>
        </div>
+     @endrole
        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8 col-md-offset-1">
         <div class="form-group form-float {{ $errors->has('phon_num_one') ? 'has-error' : ''}}">
           <div class="form-line">
-             <input   class="form-control" name="phon_num_one" type="number" id="phon_num_one" value="{{ $property->phon_num_one or ''}}">
+             <input   class="form-control" name="phon_num_one" type="number" id="phon_num_one" value="{{ $property->phon_num_one or ''}}" required>
              <label class="form-label">Phon Number One</label>
              {!! $errors->first('phon_num_one', '
              <p class="help-block">:message</p>
